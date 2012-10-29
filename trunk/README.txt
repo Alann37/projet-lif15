@@ -1,3 +1,5 @@
+TP link : http://liris.cnrs.fr/~sbrandel/enseignement/LIF15/TP01/
+
 Version control insctruction:
 	
 - You can check out the Subversion repository at this link : https://projet-lif15.googlecode.com/svn/trunk/
