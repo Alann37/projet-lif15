@@ -5,9 +5,9 @@ file(
     source_files
     src/*
 )
-set(EXECUTABLE_OUTPUT_PATH bin)
+set(EXECUTABLE_OUTPUT_PATH ../bin)
 # Déclaration de l'exécutable
 add_executable(
-    bin
+    automate 
     ${source_files}
 )
