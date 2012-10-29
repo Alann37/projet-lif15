@@ -5,7 +5,7 @@
 
 using namespace std;
 
-struct sAutomate{
+struct s_Automate{
   // caractéristiques
   int nb_etats;
   int nb_symboles;
@@ -20,9 +20,9 @@ struct sAutomate{
 
   // matrice de transition
   // (stockée dans un tableau dynamique 2D, un vector de vectors...)
-  vector<vector<int>> matrice_transition;
+  //vector<int,int> matrice_transition;
 
-
+  bool readfile(const char* filename);
 } typedef Automate;
 
 #endif // AUTOMATE_H
