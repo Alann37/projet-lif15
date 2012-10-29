@@ -23,6 +23,9 @@ struct s_Automate{
   vector<vector<int>> matrice_transition;
 
   bool readfile(const char* filename);
+  pair<int,bool> delta(const int state, const char symbole);
+
+
 } typedef Automate;
 
 #endif // AUTOMATE_H
