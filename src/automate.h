@@ -20,7 +20,7 @@ struct s_Automate{
 
   // matrice de transition
   // (stockée dans un tableau dynamique 2D, un vector de vectors...)
-  //vector<int,int> matrice_transition;
+  vector<vector<int>> matrice_transition;
 
   bool readfile(const char* filename);
 } typedef Automate;
