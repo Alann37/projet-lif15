@@ -5,6 +5,7 @@
 
 using namespace std;
 
+//TODO: Add a comment
 struct s_Automate{
   // caractéristiques
   int nb_etats;
@@ -15,14 +16,14 @@ struct s_Automate{
   int etat_initial;
 
   // états finaux
-  // (stockés dans un tableau dynamique, un vector...)
   vector<int> etats_finaux;
 
   // matrice de transition
-  // (stockée dans un tableau dynamique 2D, un vector de vectors...)
   vector<vector<int>> matrice_transition;
 
+  //TODO: Add a comment
   bool readfile(const char* filename);
+  //TODO: Add a comment
   pair<int,bool> delta(const int state, const char symbole);
 
 
