@@ -3,6 +3,9 @@
 
 using namespace std;
 
+/*!
+ * \brief main Point d'entrée du programme
+ */
 int main(int argc, char** argv)
 {
 
