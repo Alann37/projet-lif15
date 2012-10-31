@@ -22,25 +22,17 @@ Automate::~Automate()
     delete matrice_transition;
 }
 
-Automate* Automate::readfile(const char* filename)
+pair<int, bool> Automate::delta(const int state, const char symbole) const
 {
-    ifstream file (filename);
-    if (file.is_open())
+    //TODO: Test
+    int rstate = this->matrice_transition[state][symbole];
+    set<int>::iterator i;
+    for(i = etats_finaux.begin();i != etats_finaux.end();i++)
     {
-      string line;
-      string data;
-      while ( file.good() )
-      {
-        getline (file,line);
-        data += line + "\n";
-      }
-      file.close();
-      Automate* value = new Automate();
-      *value << data.c_str();
-      return value;
+        if(*i == rstate)
+            return pair<int, bool>(rstate,true);
     }
-    else
-        return (Automate*)0;
+    return pair<int, bool>(rstate,false);
 }
 
 ostream& operator<<(ostream& stream, const Automate& value)
@@ -82,52 +74,4 @@ istream& operator>> (istream& stream, Automate& value)
         value.matrice_transition[state][symbole] = rstate;
     }
     return stream;
-}
-
-Automate& Automate::operator <<(const char* data)
-{
-    char* reader = (char*)data;
-    // lecture du nombre d'états, de symboles et d'états finaux
-    reader += sscanf_s(reader,"%d %d %d\n", &this->nb_etats, &this->nb_symboles, &this->nb_etats_finaux);
-
-    for(int i = 0; i < this->nb_etats; i++)
-    {
-        vector<int> line = vector<int>();
-        line.assign(this->nb_symboles,0);
-        this->matrice_transition.push_back(line);
-    }
-
-    // lecture de l'état initial
-    reader += sscanf_s(reader, "%d\n", &this->etat_initial);
-
-    // lecture des états finaux
-    for (int i=0; i<this->nb_etats_finaux; i++) {
-      int e;
-      reader += sscanf_s(reader, "%d\n", &e);
-      // e : état final courant
-      this->etats_finaux.insert(e);
-    }
-
-    // lecture de la matrice delta
-    int e, ne; char c; // (e,c,ne) : transition courante
-    reader += sscanf_s(reader, "%d %c %d\n", &e, &c,sizeof(c), &ne);
-    while (reader != nullptr) {
-      reader += sscanf_s(reader, "%d %c %d\n", &e, &c,sizeof(c), &ne);
-      this->matrice_transition[e][(int)c] = ne;
-    }
-
-    return *this;
-}
-
-pair<int, bool> Automate::delta(const int state, const char symbole) const
-{
-    //TODO: Test
-    int rstate = this->matrice_transition[state][symbole];
-    set<int>::iterator i;
-    for(i = etats_finaux.begin();i != etats_finaux.end();i++)
-    {
-        if(*i == rstate)
-            return pair<int, bool>(rstate,true);
-    }
-    return pair<int, bool>(rstate,false);
 }
