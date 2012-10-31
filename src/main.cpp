@@ -37,9 +37,12 @@ int main(int argc, char** argv)
             cin >> temp;
             final_state.insert(temp);
         }
-        cout << "Veillez " << endl;
+        cout << "Veillez saisir l'état de sortie pour la fonction de transition " << endl;
     }
     //TODO:Load a file if argc > 1 or ask for automate parameter to the user before start the execution of the programm.
     //TODO:Ask for a string to the user to execute with the current loaded automate.
+
     return 0;
 }
+
+    //TODO:Write a test method
