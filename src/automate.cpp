@@ -1,4 +1,4 @@
-#include "automate.h"
+﻿#include "automate.h"
 
 #include <iostream>
 #include <fstream>

@@ -1,4 +1,4 @@
-#ifndef AUTOMATE_H
+ï»¿#ifndef AUTOMATE_H
 #define AUTOMATE_H
 
 #include <vector>
@@ -8,16 +8,16 @@
 using namespace std;
 
 /*!
- * \brief Contient les attribut et méthode permetant la définition et l'execution d'un automate finit deterministe
+ * \brief Contient les attribut et mÃ©thode permetant la dÃ©finition et l'execution d'un automate finit deterministe
  */
 class Automate{
 
-  // caractéristiques
+  // caractÃ©ristiques
   int nb_etats;
   int nb_symboles;
   int nb_etats_finaux;
-  int etat_initial; // états initial
-  set<int> etats_finaux; // états finaux
+  int etat_initial; // Ã©tats initial
+  set<int> etats_finaux; // Ã©tats finaux
   vector<vector<int>> matrice_transition; // matrice de transition
 
 public:
@@ -25,18 +25,18 @@ public:
   explicit Automate();
   ~Automate();
   /*!
-   * \brief delta fonction de transition de l'automate qui retourne un etat de sortie en fonction d'un etat et d'un symbole donné en entrée.
+   * \brief delta fonction de transition de l'automate qui retourne un etat de sortie en fonction d'un etat et d'un symbole donnÃ© en entrÃ©e.
    * \param state etat courant de l'automate
-   * \param symbole symoble à lire par l'automate
-   * \return pair<int,bool> representant le numéro de l'état de sortie et un booléen indiquant si celui ci est final ou non
+   * \param symbole symoble Ã  lire par l'automate
+   * \return pair<int,bool> representant le numÃ©ro de l'Ã©tat de sortie et un boolÃ©en indiquant si celui ci est final ou non
    */
   pair<int,bool> delta(const int state, const char symbole) const;
   /*!
-   * \brief operator << operateur de flux de sortie permetant la sérialition de l'automate passé en argument dans le flux à gauche de l'opérande
+   * \brief operator << operateur de flux de sortie permetant la sÃ©rialition de l'automate passÃ© en argument dans le flux Ã  gauche de l'opÃ©rande
    */
   friend ostream& operator<< (ostream& stream, const Automate& value);
   /*!
-   * \brief operator >> opérateur de flux d'entrée permetant la désérialisation dans l'automate passé en argument à partir du flux à gauche de l'opérande
+   * \brief operator >> opÃ©rateur de flux d'entrÃ©e permetant la dÃ©sÃ©rialisation dans l'automate passÃ© en argument Ã  partir du flux Ã  gauche de l'opÃ©rande
    */
   friend istream& operator>> (istream& stream, Automate& value);
 
