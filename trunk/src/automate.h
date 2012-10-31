@@ -31,6 +31,9 @@ public:
    * \return pair<int,bool> representant le numéro de l'état de sortie et un booléen indiquant si celui ci est final ou non
    */
   pair<int,bool> delta(const int state, const char symbole) const;
+
+  //TODO: Use << overloads to accepte or not string or other lirreral format
+
   /*!
    * \brief operator << operateur de flux de sortie permetant la sérialition de l'automate passé en argument dans le flux à gauche de l'opérande
    */

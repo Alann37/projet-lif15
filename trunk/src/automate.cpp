@@ -18,13 +18,13 @@ Automate::Automate()
 
 Automate::~Automate()
 {
+    //TODO:Correct that!
     delete etats_finaux;
     delete matrice_transition;
 }
 
 pair<int, bool> Automate::delta(const int state, const char symbole) const
 {
-    //TODO: Test
     int rstate = this->matrice_transition[state][symbole];
     set<int>::iterator i;
     for(i = etats_finaux.begin();i != etats_finaux.end();i++)
