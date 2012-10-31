@@ -2,31 +2,36 @@
 #define AUTOMATE_H
 
 #include <vector>
+#include <string>
 
 using namespace std;
 
 //TODO: Add a comment
-struct s_Automate{
-  // caractéristiques
+class Automate
+{
+  // caractristiques
+private :
   int nb_etats;
   int nb_symboles;
   int nb_etats_finaux;
 
-  // états initial
+  // tats initial
   int etat_initial;
 
-  // états finaux
+  // tats finaux
   vector<int> etats_finaux;
 
   // matrice de transition
-  vector<vector<int>> matrice_transition;
+  vector<vector<int> > matrice_transition;
 
+public:
   //TODO: Add a comment
-  bool readfile(const char* filename);
+  bool readfile(const string filename);
   //TODO: Add a comment
-  pair<int,bool> delta(const int state, const char symbole);
+  pair<int,bool> delta(const string str);
+
+};
 
 
-} typedef Automate;
 
 #endif // AUTOMATE_H
