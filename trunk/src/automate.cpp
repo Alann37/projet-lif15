@@ -8,16 +8,41 @@ using namespace std;
 
 Automate::Automate()
 {
-    this->etats_finaux = set<int>();
-    this->etat_initial = 0;
-    this->nb_etats = 0;
-    this->nb_etats_finaux = 0;
-    this->nb_symboles = 0;
-    this->matrice_transition = vector<vector<int>>();
+    etats_finaux = set<int>();
+    etat_initial = 0;
+    nb_etats = 0;
+    nb_etats_finaux = 0;
+    nb_symboles = 0;
+    matrice_transition = vector<vector<int>>();
 }
 
 Automate::~Automate()
 {
+}
+
+int Automate::statesCount() const
+{
+    return nb_etats;
+}
+
+int Automate::symbolesCount() const
+{
+    return nb_symboles;
+}
+
+const vector<int>& Automate::finalState() const
+{
+    return etats_finaux;
+}
+
+int Automate::initialState() const
+{
+    return etat_initial;
+}
+
+void Automate::initialize()
+{
+    _currentState = etat_initial;
 }
 
 int Automate::currentState() const
@@ -34,13 +59,17 @@ bool Automate::isFinal() const
 
 int Automate::delta(const int state, const char symbole) const
 {
-    return this->matrice_transition[state][symbole];
+    return this->matrice_transition[state][(int)symbole - 97];
 }
 
 Automate& Automate::operator<< (const string& value)
 {
     for( string::const_iterator i = value.begin(); i != value.end(); i++)
+    {
+        if((((int)*i - 97) < 0) || (((int)*i - 97) > nb_symboles))
+            throw overflow_error(string("Le symbole ") + *i + string(" n'est pas accepté par l'automate"));
         _currentState = delta(currentState(),*i);
+    }
     return *this;
 }
 
