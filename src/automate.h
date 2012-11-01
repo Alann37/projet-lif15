@@ -19,7 +19,7 @@ class Automate{
   int _finalStatesCount;
   int _initialState; // états initial
   set<int> _finalStates; // états finaux
-  vector<vector<int>> matrice_transition; // matrice de transition
+  vector<vector<int>> _transitionMatrix; // matrice de transition
   int _currentState;
 public:
 
@@ -49,7 +49,9 @@ public:
    */
   int initialState() const;
 
+
   explicit Automate();
+  explicit Automate(int myInitialState,const set<int>& myFinalStates,const vector<vector<int>>& myTransitionMaxtrix);
   ~Automate();
   /*!
    * \brief initialize définit l'état actuel de l'automate sur l'état de départ.
