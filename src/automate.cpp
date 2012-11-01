@@ -18,21 +18,30 @@ Automate::Automate()
 
 Automate::~Automate()
 {
-    //TODO:Correct that!
-    delete etats_finaux;
-    delete matrice_transition;
 }
 
-pair<int, bool> Automate::delta(const int state, const char symbole) const
+int Automate::currentState() const
 {
-    int rstate = this->matrice_transition[state][symbole];
-    set<int>::iterator i;
-    for(i = etats_finaux.begin();i != etats_finaux.end();i++)
-    {
-        if(*i == rstate)
-            return pair<int, bool>(rstate,true);
-    }
-    return pair<int, bool>(rstate,false);
+    return _currentState;
+}
+
+bool Automate::isFinal() const
+{
+    for(set<int>::iterator i = etats_finaux.begin(); i != etats_finaux.end(); i++)
+        if(*i == currentState()) return true;
+    return false;
+}
+
+int Automate::delta(const int state, const char symbole) const
+{
+    return this->matrice_transition[state][symbole];
+}
+
+Automate& Automate::operator<< (const string& value)
+{
+    for( string::const_iterator i = value.begin(); i != value.end(); i++)
+        _currentState = delta(currentState(),*i);
+    return *this;
 }
 
 ostream& operator<<(ostream& stream, const Automate& value)

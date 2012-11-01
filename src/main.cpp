@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <fstream>
 #include "automate.h"
 
 using namespace std;
@@ -8,38 +9,48 @@ using namespace std;
  */
 int main(int argc, char** argv)
 {
-    Automate* automate = new Automate();
+    Automate automate = Automate();
     if(argc > 1)
     {
-         ofstream  file(argv[1],ios::out);
+         ifstream file;
+         file.open(argv[1]);
          if (file.is_open())
             file >> automate;
     }
     else
     {
         int nb_state, nb_symbole, nb_final_state, start_state;
-        set<int> final_state();
-        cout << "Quel est le nombre d'états de l'automate ?" << endl;
+        set<int> final_state = set<int>();
+        cout << "Quel est le nombre d'états de l'automate ?";
         cin >> nb_state;
-        cout << "Quel est le nombre de symbole composant l'alphabet accepté par l'automate ?" << endl;
+        cout << endl << "Quel est le nombre de symbole composant l'alphabet accepté par l'automate ?";
         cin >> nb_symbole;
-        cout << "Quel est le nombre d'états finaux de l'automate' ?" << endl;
+        cout << endl << "Quel est le nombre d'états finaux de l'automate' ?";
         cin >> nb_final_state;
-        cout << "Quel est le numéro de l'état de départ de l'automate ?" << endl;
+        cout << endl << "Quel est le numéro de l'état de départ de l'automate ?";
         cin >> start_state;
         int temp;
-        cout << "Quel est le numéro du 1rt état final de l'automate ?" << endl;
+        cout << endl << "Quel est le numéro du 1er état final de l'automate ?";
         cin >> temp;
         final_state.insert(temp);
-        for (int i = 1; i < automate->nb_etats_finaux; i++)
+        for (int i = 1; i < nb_final_state; i++)
         {
-            cout << "Quel est le numéro du " << i << "ème état final de l'automate ?" << endl;
+            cout << endl << "Quel est le numéro du " << (i+1) << "ème état final de l'automate ?";
             cin >> temp;
             final_state.insert(temp);
         }
-        cout << "Veillez saisir l'état de sortie pour la fonction de transition " << endl;
+        for(int i = 0; i < nb_state; i++)
+        {
+            for(int j = 0; j < nb_symbole; j++)
+            {
+                char c;
+                cout << endl << "Veillez saisir l'état de sortie pour la fonction de transition de l'état " << i << " symbole " << (char)(j+97) << ":";
+                cin >> c;
+            }
+        }
+
     }
-    //TODO:Load a file if argc > 1 or ask for automate parameter to the user before start the execution of the programm.
+
     //TODO:Ask for a string to the user to execute with the current loaded automate.
 
     return 0;

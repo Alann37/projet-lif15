@@ -4,6 +4,7 @@
 #include <vector>
 #include <set>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -19,8 +20,19 @@ class Automate{
   int etat_initial; // états initial
   set<int> etats_finaux; // états finaux
   vector<vector<int>> matrice_transition; // matrice de transition
-
+  int _currentState;
 public:
+
+  /*!
+  * \brief currentState obtient le numéro de l'état actuel
+  * \return le numéro de l'état actuel
+  */
+  int currentState() const;
+  /*!
+   * \brief isFinal retourne Vrai si l'état actuel de l'automate est final
+   * \return Vrai si l'état actuel de l'automate est final
+   */
+  bool isFinal() const;
 
   explicit Automate();
   ~Automate();
@@ -30,9 +42,14 @@ public:
    * \param symbole symoble à lire par l'automate
    * \return pair<int,bool> representant le numéro de l'état de sortie et un booléen indiquant si celui ci est final ou non
    */
-  pair<int,bool> delta(const int state, const char symbole) const;
+  int delta(const int state, const char symbole) const;
 
-  //TODO: Use << overloads to accepte or not string or other lirreral format
+  /*!
+   * \brief operator << operateur de lecture de l'automate, l'automate execute l'ensemble des symboles passés en arguments à partir de son état courant
+   * \param value chaine de caractère contenant un suite de symboles acceptés par l'automate
+   * \return l'automate dans son état après lecture de la chaine de caractère
+   */
+  Automate& operator<< (const string& value);
 
   /*!
    * \brief operator << operateur de flux de sortie permetant la sérialition de l'automate passé en argument dans le flux à gauche de l'opérande
