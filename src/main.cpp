@@ -15,7 +15,16 @@ int main(int argc, char** argv)
          ifstream file;
          file.open(argv[1]);
          if (file.is_open())
-            file >> automate;
+         {
+             try
+             {
+                 file >> automate;
+             }
+             catch(exception const& e)
+             {
+                 cerr << "ERREUR : "<< e.what() << endl;
+             }
+         }
     }
     else
     {

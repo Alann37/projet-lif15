@@ -24,18 +24,37 @@ class Automate{
 public:
 
   /*!
-  * \brief currentState obtient le numéro de l'état actuel
-  * \return le numéro de l'état actuel
+  * \brief currentState obtient le numéro de l'état actuel.
   */
   int currentState() const;
   /*!
-   * \brief isFinal retourne Vrai si l'état actuel de l'automate est final
-   * \return Vrai si l'état actuel de l'automate est final
+   * \brief isFinal retourne Vrai si l'état actuel de l'automate est final.
    */
   bool isFinal() const;
 
+  /*!
+   * \brief statesCount Obtient le nombre d'etat de l'automate.
+   */
+  int statesCount() const;
+  /*!
+   * \brief symbolesCount Obtient le nombre de symbole accepté par l'automate. L'automate accepte tous les caractère en partant du caractère ASCII 'a' jusqu'au caractère ASCII ('a' + statesCount()).
+   */
+  int symbolesCount() const;
+  /*!
+   * \brief finalState Obtient un tableau non modifiable des états finaux de l'automate.
+   */
+  const vector<int> &finalState() const;
+  /*!
+   * \brief initialState Obtient l'état initial de l'automate
+   */
+  int initialState() const;
+
   explicit Automate();
   ~Automate();
+  /*!
+   * \brief initialize définit l'état actuel de l'automate sur l'état de départ.
+   */
+  void initialize();
   /*!
    * \brief delta fonction de transition de l'automate qui retourne un etat de sortie en fonction d'un etat et d'un symbole donné en entrée.
    * \param state etat courant de l'automate
@@ -47,6 +66,7 @@ public:
   /*!
    * \brief operator << operateur de lecture de l'automate, l'automate execute l'ensemble des symboles passés en arguments à partir de son état courant
    * \param value chaine de caractère contenant un suite de symboles acceptés par l'automate
+   * \exception std::overflow_error le symbole lu n'est pas accepté par l'automate
    * \return l'automate dans son état après lecture de la chaine de caractère
    */
   Automate& operator<< (const string& value);
