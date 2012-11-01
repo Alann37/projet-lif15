@@ -14,11 +14,11 @@ using namespace std;
 class Automate{
 
   // caractéristiques
-  int nb_etats;
-  int nb_symboles;
-  int nb_etats_finaux;
-  int etat_initial; // états initial
-  set<int> etats_finaux; // états finaux
+  int _statesCount;
+  int _symbolesCount;
+  int _finalStatesCount;
+  int _initialState; // états initial
+  set<int> _finalStates; // états finaux
   vector<vector<int>> matrice_transition; // matrice de transition
   int _currentState;
 public:
@@ -43,7 +43,7 @@ public:
   /*!
    * \brief finalState Obtient un tableau non modifiable des états finaux de l'automate.
    */
-  const vector<int> &finalState() const;
+  const set<int> &finalState() const;
   /*!
    * \brief initialState Obtient l'état initial de l'automate
    */
