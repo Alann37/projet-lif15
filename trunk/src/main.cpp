@@ -81,6 +81,8 @@ int main(int argc, char** argv)
         cin >> str;
         //BUG: The automate can not read correctly a string
         automate << str;
+        cout << "L'automate c'est finit dans l'état : " << automate.currentState() << "." << endl;
+        cout << "La chaine de caractère : '" << str << "' est " << (automate.isFinal() ? "acceptée" : "refusée") << "par l'automate." << endl;
     }
     catch(exception const& e)
     {
