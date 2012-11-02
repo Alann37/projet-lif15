@@ -14,6 +14,8 @@ Automate::Automate()
     _finalStatesCount = 1;
     _symbolesCount = 1;
     _transitionMatrix = vector<vector<int>>();
+	_currentState = 0;
+    //TODO: Initialize correctly
 }
 
 Automate::Automate(int myInitialState,const set<int>& myFinalStates,const vector<vector<int>>& myTransitionMaxtrix)
@@ -47,6 +49,7 @@ Automate::Automate(int myInitialState,const set<int>& myFinalStates,const vector
     _symbolesCount = myTransitionMaxtrix[0].size();
     _statesCount = myTransitionMaxtrix.size();
     _finalStatesCount = myFinalStates.size();
+	_currentState = 0;
 }
 
 Automate::~Automate()

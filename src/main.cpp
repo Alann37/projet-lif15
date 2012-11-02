@@ -9,7 +9,7 @@ using namespace std;
  */
 int main(int argc, char** argv)
 {
-    Automate automate = Automate();
+    Automate* automate = new Automate();
     if(argc > 1)
     {
          ifstream file;
@@ -18,8 +18,7 @@ int main(int argc, char** argv)
          {
              try
              {
-                 //BUG: Can not load correctly an automate
-                 file >> automate;
+                 file >> *automate;
              }
              catch(exception const& e)
              {
@@ -64,9 +63,9 @@ int main(int argc, char** argv)
         }
         try
         {
-            automate = Automate(initial_state,final_state,transitionMatrix);
+            automate = new Automate(initial_state,final_state,transitionMatrix);
             cout << endl << "Automate sérialisé :";
-            cout << endl << automate;
+            cout << endl << *automate;
         }
         catch(exception const& e)
         {
@@ -79,10 +78,9 @@ int main(int argc, char** argv)
         string str;
         cout << endl << "Veuillez saisir une chaine de caractère à lire par l'automate :";
         cin >> str;
-        //BUG: The automate can not read correctly a string
-        automate << str;
-        cout << "L'automate c'est finit dans l'état : " << automate.currentState() << "." << endl;
-        cout << "La chaine de caractère : '" << str << "' est " << (automate.isFinal() ? "acceptée" : "refusée") << "par l'automate." << endl;
+        *automate << str;
+        cout << "L'automate c'est finit dans l'état : " << automate->currentState() << "." << endl;
+        cout << "La chaine de caractère : '" << str << "' est " << (automate->isFinal() ? "acceptée" : "refusée") << "par l'automate." << endl;
     }
     catch(exception const& e)
     {
