@@ -98,16 +98,21 @@ int Automate::delta(const int state, const char symbole) const
     return this->_transitionMatrix[state][(int)symbole - 97];
 }
 
-Automate& Automate::operator<< (const string& value)
+void Automate::read(const string& value, bool verbose)
 {
-    cout << "L'automate est dans l'état " << _currentState << ", il va lire la chaine de caractère : '" << value << "'" << endl;
+    if(verbose) cout << "L'automate est dans l'état " << _currentState << ", il va lire la chaine de caractère : '" << value << "'" << endl;
     for( string::const_iterator i = value.begin(); i != value.end(); i++)
     {
         if((((int)*i - 97) < 0) || (((int)*i - 97) > _symbolesCount))
             throw overflow_error(string("Le symbole ") + *i + string(" n'est pas accepté par l'automate"));
         _currentState = delta(currentState(),*i);
-        cout << "L'automate lit le caractère " << *i << " et passe dans l'état " << _currentState << endl;
+        if(verbose) cout << "L'automate lit le caractère " << *i << " et passe dans l'état " << _currentState << endl;
     }
+}
+
+Automate& Automate::operator<< (const string& value)
+{
+    read(value);
     return *this;
 }
 

@@ -74,6 +74,13 @@ public:
   int delta(const int state, const char symbole) const;
 
   /*!
+   * \brief read l'automate lit la chaine de caractère contenant un suite de symboles acceptés par l'automate
+   * \param value chaine de caractère contenant un suite de symboles acceptés par l'automate
+   * \param verbose Affiche sur la sortie standard le détails des transition entre les différents état de l'automate a chaque lecture de symbole de la chaine de caractère passée en argument.
+   */
+  void read(const string& value, bool verbose = false);
+
+  /*!
    * \brief operator << operateur de lecture de l'automate, l'automate execute l'ensemble des symboles passés en arguments à partir de son état courant
    * \param value chaine de caractère contenant un suite de symboles acceptés par l'automate
    * \exception std::overflow_error le symbole lu n'est pas accepté par l'automate
