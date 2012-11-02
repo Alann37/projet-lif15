@@ -21,6 +21,9 @@ class Automate{
   set<int> _finalStates; // états finaux
   vector<vector<int>> _transitionMatrix; // matrice de transition
   int _currentState;
+
+  Automate(const Automate& ); /*Desactivation du constructeur par copie*/
+
 public:
 
   /*!
@@ -49,8 +52,13 @@ public:
    */
   int initialState() const;
 
-
   explicit Automate();
+  /*!
+   * \brief Automate Construit un automate deterministe finit à partir d'une matrice représentant les resultat de sa fonction transition, d'un état initial et d'un ou plusieurs états de destination.
+   * \param myInitialState Etat initial
+   * \param myFinalStates Tableau dynamique non vide d'états finaux
+   * \param myTransitionMaxtrix Matrice à deux dimension représentant les résultat de la fonction transition (Etats x Symbole -> Etats) qui a chaque etat et a chaque symbole acossie un état destination.
+   */
   explicit Automate(int myInitialState,const set<int>& myFinalStates,const vector<vector<int>>& myTransitionMaxtrix);
   ~Automate();
   /*!
