@@ -78,9 +78,48 @@ int main(int argc, char** argv)
         string str;
         cout << endl << "Veuillez saisir une chaine de caractère à lire par l'automate :";
         cin >> str;
-        *automate << str;
+        automate->read(str,true);
         cout << "L'automate c'est finit dans l'état : " << automate->currentState() << "." << endl;
         cout << "La chaine de caractère : '" << str << "' est " << (automate->isFinal() ? "acceptée" : "refusée") << "par l'automate." << endl;
+
+        int lenght = 10;
+        vector<string>* lastLine = new vector<string>();
+        vector<string>* newLine = new vector<string>();
+        vector<string>* lemme = new vector<string>();
+
+        for(int i = 0; i < automate->symbolesCount(); i++)
+        {
+            lastLine->push_back(string(1,(char)(i + 97)));
+            lemme->push_back(string(1,(char)(i + 97)));
+        }
+
+        for(int i = 0; i < 10; i++)
+        {
+            for(vector<string>::iterator j = lastLine->begin(); j != lastLine->end(); j++)
+            {
+                for(int k = 0; k < automate->symbolesCount(); k++)
+                {
+                    newLine->push_back(*j + (char)(k + 97));
+                    lemme->push_back(*j + (char)(k + 97));
+                }
+            }
+            vector<string>* temp = lastLine;
+            lastLine = newLine;
+            newLine = temp;
+            newLine->clear();
+        }
+
+        for(vector<string>::iterator i = lemme->begin(); i != lemme->end(); i++)
+		{
+			automate->initialize();
+			*automate << *i;
+			if (automate->isFinal())
+				cout << *i << endl;
+		}
+        
+        delete lastLine;
+        delete newLine;
+        delete lemme;
     }
     catch(exception const& e)
     {
