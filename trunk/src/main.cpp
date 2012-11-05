@@ -4,6 +4,8 @@
 
 using namespace std;
 
+void test();
+
 /*!
  * \brief main Point d'entrée du programme
  */
@@ -26,6 +28,10 @@ int main(int argc, char** argv)
              }
              file.close();
          }
+		 else
+		 {
+			 cerr << "Impossible d'ouvrir le fichier passé en argument.";
+		 }
     }
     else
     {
@@ -123,10 +129,49 @@ int main(int argc, char** argv)
     }
     catch(exception const& e)
     {
-        cerr << "ERREUR : "<< e.what() << endl;
+        cerr << "Erreur : "<< e.what() << endl;
     }
+
+    test();
 
     return 0;
 }
 
-    //TODO:Write a test method
+/*!
+ * \brief test test unitaire d'un automate n'acceptant que des chaine de la forme 'a*' avec un alphabet sigma = ('a','b'). Le détails des opérations de chaque chaines testées est affiché sur la sortie standard.
+ */
+void test()
+{
+    set<int> finalState = set<int>();
+    vector<vector<int>> transMatrix = vector<vector<int>>();
+    vector<int> line = vector<int>();
+    finalState.insert(0);
+    line.push_back(0);
+    line.push_back(1);
+    transMatrix.push_back(line);
+    line.clear();
+    line.push_back(1);
+    line.push_back(1);
+    transMatrix.push_back(line);
+    try
+    {
+        Automate* automate = new Automate(0,finalState,transMatrix);
+        cout << "Test d'un automate n'acceptant que des a avec le détails des différentes chaines testées :" << endl;
+        automate->read(string("a"),true);
+        cout << "La chaine de caractère : '" << "a" << "' est " << (automate->isFinal() ? "acceptée" : "refusée") << "par l'automate." << endl;
+        automate->read(string("b"),true);
+        cout << "La chaine de caractère : '" << "b" << "' est " << (automate->isFinal() ? "acceptée" : "refusée") << "par l'automate." << endl;
+        automate->read(string("aaaaaab"),true);
+        cout << "La chaine de caractère : '" << "aaaaaab" << "' est " << (automate->isFinal() ? "acceptée" : "refusée") << "par l'automate." << endl;
+        automate->read(string("baaaaaa"),true);
+        cout << "La chaine de caractère : '" << "baaaaaa" << "' est " << (automate->isFinal() ? "acceptée" : "refusée") << "par l'automate." << endl;
+        automate->read(string("aabbaaa"),true);
+        cout << "La chaine de caractère : '" << "aabbaaa" << "' est " << (automate->isFinal() ? "acceptée" : "refusée") << "par l'automate." << endl;
+        automate->read(string("bbbbbbb"),true);
+        cout << "La chaine de caractère : '" << "bbbbbbb" << "' est " << (automate->isFinal() ? "acceptée" : "refusée") << "par l'automate." << endl;
+    }
+    catch(exception const& e)
+    {
+        cerr << "Erreur : "<< e.what() << endl;
+    }
+}
