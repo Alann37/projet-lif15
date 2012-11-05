@@ -14,8 +14,10 @@ Automate::Automate()
     _finalStatesCount = 1;
     _symbolesCount = 1;
     _transitionMatrix = vector<vector<int>>();
+    vector<int> line = vector<int>();
+    line.push_back(0);
+    _transitionMatrix.push_back(line);
 	_currentState = 0;
-    //TODO: Initialize correctly
 }
 
 Automate::Automate(int myInitialState,const set<int>& myFinalStates,const vector<vector<int>>& myTransitionMaxtrix)
@@ -135,12 +137,16 @@ ostream& operator<<(ostream& stream, const Automate& value)
 istream& operator>> (istream& stream, Automate& value)
 {
     string blank;
-    stream >> value._statesCount >> blank >> value._symbolesCount >> blank >> value._finalStatesCount >> blank;
-    stream >> value._initialState >> blank;
-    int state, symbole, rstate;
+    stream >> value._statesCount;
+	stream >> value._symbolesCount;
+	stream >> value._finalStatesCount;
+
+    stream >> value._initialState;
+    int state, rstate;
+	char symbole;
     for(int i = 0; i < value._finalStatesCount; i++)
     {
-        stream >> state >> blank;
+        stream >> state;
         value._finalStates.insert(state);
     }
     vector<int> line = vector<int>();
@@ -152,8 +158,10 @@ istream& operator>> (istream& stream, Automate& value)
     }
     for(int i = 0; i < value._statesCount * value._symbolesCount; i++)
     {
-        stream >> state >> blank >> symbole >> blank >> rstate >> blank;
-        value._transitionMatrix[state][symbole] = rstate;
+        stream >> state;
+		stream >> symbole;
+		stream >> rstate;
+        value._transitionMatrix[state][(int)symbole - 97] = rstate;
     }
     return stream;
 }
